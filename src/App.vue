@@ -3,7 +3,7 @@
     <h1>UI Kit</h1>
     <h2>Buttons</h2>
     <StButton color="secondary" @click="clickHandler('aaaaa')">Dash</StButton>
-    <StButton @click="clickHandler('bbbbbaaaaaaaaaaaaaaaa')">Settings</StButton>
+    <StButton @click="clickHandler('heheh')">Settings</StButton>
     <br />
     <br />
     <h2>Inputs</h2>
@@ -241,10 +241,13 @@ export default {
       },
       { key: 'blockHeight', title: 'Blockheight' },
     ])
-
+      function clickHandler(data){
+        console.log(data);
+      }
     return {
       tableData,
-      tableColumns
+      tableColumns,
+      clickHandler
     }
   }
 };
