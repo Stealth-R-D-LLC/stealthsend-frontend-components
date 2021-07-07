@@ -9,6 +9,12 @@
       >
       <a
         class="tabs-link"
+        :class="{ 'tabs-link__active': activeTab === 'button' }"
+        @click="changeTab('button')"
+        >Button</a
+      >
+      <a
+        class="tabs-link"
         :class="{ 'tabs-link__active': activeTab === 'checkbox' }"
         @click="changeTab('checkbox')"
         >Checkbox</a
@@ -708,7 +714,12 @@
                 <p>Description/help text</p>
               </template>
             </StFormItem>
-            <StFormItem label="Label center" position="center" :filled="input">
+            <StFormItem
+              label="Label center"
+              position="center"
+              color="dark"
+              :filled="input"
+            >
               <StInput v-model="input" placeholder="Field value">
                 <svg
                   width="18"
@@ -779,6 +790,71 @@
           </div>
         </div>
       </template>
+      <template v-if="activeTab === 'button'">
+        <h1>Buttons</h1>
+        <div class="light">
+          <h2>Type A</h2>
+          <div class="button-grid">
+            <StButton size="large">Send</StButton>
+            <StButton size="medium">Send</StButton>
+            <StButton>Send</StButton>
+            <StButton size="small">Send</StButton>
+            <StButton size="xsmall">Send</StButton>
+          </div>
+          <div class="button-grid">
+            <StButton disabled size="large">Send</StButton>
+            <StButton disabled size="medium">Send</StButton>
+            <StButton disabled>Send</StButton>
+            <StButton disabled size="small">Send</StButton>
+            <StButton disabled size="xsmall">Send</StButton>
+          </div>
+          <h2>Type B</h2>
+          <div class="button-grid">
+            <StButton type="type-b" size="large">Send</StButton>
+            <StButton type="type-b" size="medium">Send</StButton>
+            <StButton type="type-b">Send</StButton>
+            <StButton type="type-b" size="small">Send</StButton>
+            <StButton type="type-b" size="xsmall">Send</StButton>
+          </div>
+          <div class="button-grid">
+            <StButton disabled type="type-b" size="large">Send</StButton>
+            <StButton disabled type="type-b" size="medium">Send</StButton>
+            <StButton disabled type="type-b">Send</StButton>
+            <StButton disabled type="type-b" size="small">Send</StButton>
+            <StButton disabled type="type-b" size="xsmall">Send</StButton>
+          </div>
+          <h2>Type C</h2>
+          <div class="button-grid">
+            <StButton type="type-c" size="large">Send</StButton>
+            <StButton type="type-c" size="medium">Send</StButton>
+            <StButton type="type-c">Send</StButton>
+            <StButton type="type-c" size="small">Send</StButton>
+            <StButton type="type-c" size="xsmall">Send</StButton>
+          </div>
+          <div class="button-grid">
+            <StButton disabled type="type-c" size="large">Send</StButton>
+            <StButton disabled type="type-c" size="medium">Send</StButton>
+            <StButton disabled type="type-c">Send</StButton>
+            <StButton disabled type="type-c" size="small">Send</StButton>
+            <StButton disabled type="type-c" size="xsmall">Send</StButton>
+          </div>
+          <h2>Type D</h2>
+          <div class="button-grid">
+            <StButton type="type-d" size="large">Send</StButton>
+            <StButton type="type-d" size="medium">Send</StButton>
+            <StButton type="type-d">Send</StButton>
+            <StButton type="type-d" size="small">Send</StButton>
+            <StButton type="type-d" size="xsmall">Send</StButton>
+          </div>
+          <div class="button-grid">
+            <StButton disabled type="type-d" size="large">Send</StButton>
+            <StButton disabled type="type-d" size="medium">Send</StButton>
+            <StButton disabled type="type-d">Send</StButton>
+            <StButton disabled type="type-d" size="small">Send</StButton>
+            <StButton disabled type="type-d" size="xsmall">Send</StButton>
+          </div>
+        </div>
+      </template>
       <template v-if="activeTab === 'checkbox'">
         <h1>Checkbox</h1>
       </template>
@@ -801,11 +877,13 @@
 <script>
 import StFormItem from '@/components/StFormItem.vue'
 import StInput from '@/components/StInput.vue'
+import StButton from '@/components/StButton.vue'
 import { ref } from 'vue'
 export default {
   components: {
     StFormItem,
-    StInput
+    StInput,
+    StButton
   },
   setup() {
     const activeTab = ref('input')
@@ -834,7 +912,7 @@ export default {
 }
 .tabs {
   display: grid;
-  grid-template-columns: repeat(6, 2fr);
+  grid-template-columns: repeat(7, 1.7fr);
 }
 .tabs-link {
   text-align: center;
@@ -865,5 +943,16 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 3fr);
   grid-gap: 80px;
+}
+.light h2 {
+  margin: 20px 0;
+}
+.button-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.button-grid + .button-grid {
+  margin-top: 40px;
 }
 </style>
