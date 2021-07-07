@@ -1,83 +1,81 @@
 <template>
-  <transition name="fade">
-    <div v-if="visible" class="st-modal">
-      <div class="st-modal-wrapper">
-        <div
-          ref="stModalRef"
-          class="st-modal-container"
-          :class="[
-            light ? 'st-modal-container--light' : 'st-modal-container--dark'
-          ]"
-        >
-          <div class="st-modal__header">
-            <slot name="header"> default header </slot>
-            <div class="controls">
-              <span
-                v-if="showBackButton && currentStep > 1"
-                class="st-modal__back-button"
-                @click="stepBack"
+  <div v-if="isVisible" class="st-modal">
+    <div class="st-modal-wrapper">
+      <div
+        ref="stModalRef"
+        class="st-modal-container"
+        :class="[
+          light ? 'st-modal-container--light' : 'st-modal-container--dark'
+        ]"
+      >
+        <div class="st-modal__header">
+          <slot name="header"> default header </slot>
+          <div class="controls">
+            <span
+              v-if="showBackButton && currentStep > 1"
+              class="st-modal__back-button"
+              @click="stepBack"
+            >
+              <svg
+                width="19"
+                height="14"
+                viewBox="0 0 19 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  width="19"
-                  height="14"
-                  viewBox="0 0 19 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M2 7h17M8 13L2 7l6-6"
-                    :stroke="light ? '#4E00F6' : '#FAF9FC'"
-                    stroke-width="2"
-                  />
-                </svg>
-              </span>
-              <span
-                v-if="showCloseButton"
-                class="st-modal__close-button"
-                @click="$emit('close')"
+                <path
+                  d="M2 7h17M8 13L2 7l6-6"
+                  :stroke="light ? '#4E00F6' : '#FAF9FC'"
+                  stroke-width="2"
+                />
+              </svg>
+            </span>
+            <span
+              v-if="showCloseButton"
+              class="st-modal__close-button"
+              @click="$emit('close')"
+            >
+              <svg
+                width="18"
+                height="14"
+                viewBox="0 0 18 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  width="18"
-                  height="14"
-                  viewBox="0 0 18 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3 1l12 12M3 13L15 1"
-                    :stroke="light ? '#4E00F6' : '#FAF9FC'"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
-            </div>
+                <path
+                  d="M3 1l12 12M3 13L15 1"
+                  :stroke="light ? '#4E00F6' : '#FAF9FC'"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
           </div>
+        </div>
 
-          <div class="st-modal__body">
-            <slot name="body"> default body </slot>
-          </div>
+        <div class="st-modal__body">
+          <slot name="body"> default body </slot>
+        </div>
 
-          <div class="st-modal__footer">
-            <slot name="footer">
-              <!-- default footer
+        <div class="st-modal__footer">
+          <slot name="footer">
+            <!-- default footer
               <button class="modal-default-button" @click="$emit('close')">
                 OK
               </button> -->
-            </slot>
-          </div>
-          <div v-if="steps > 0" class="st-modal__stepper">
-            <span
-              v-for="step in steps"
-              :key="step"
-              class="step"
-              :class="{ 'step--active': step === currentStep }"
-            ></span>
-          </div>
+          </slot>
+        </div>
+        <div v-if="steps > 0" class="st-modal__stepper">
+          <span
+            v-for="step in steps"
+            :key="step"
+            class="step"
+            :class="{ 'step--active': step === currentStep }"
+          ></span>
         </div>
       </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -153,12 +151,12 @@ export default {
       }
     }
 
-    return { stModalRef, stepBack }
+    return { stModalRef, stepBack, isVisible: ref(props.visible) }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .st-modal {
   position: fixed;
   z-index: var(--zModal);

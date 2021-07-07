@@ -1,6 +1,6 @@
 <template>
   <div
-    v-show="visibility"
+    v-if="isVisible"
     class="loading-page"
     :class="{ opaque: opaque, transparent: !opaque }"
   >
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { watchEffect } from 'vue'
+import { watchEffect, ref } from 'vue'
 export default {
   name: 'StLoader',
   props: {
@@ -25,15 +25,19 @@ export default {
     }
   },
   setup(props) {
-    watchEffect(props.visibility, () => {
+    let _visibility = ref(props.visibility)
+    watchEffect(_visibility, () => {
       // when global loading is active, it shouldn't be possible to scroll
-      document.body.classList.toggle('noscroll', props.visibility)
+      document.body.classList.toggle('noscroll', _visibility.value)
     })
+    return {
+      isVisible: _visibility
+    }
   }
 }
 </script>
 
-<style lang="postcss">
+<style>
 .loading-page {
   width: 100vw;
   height: 100vh;

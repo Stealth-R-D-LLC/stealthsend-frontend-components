@@ -3,6 +3,7 @@ import StButton from './src/components/StButton.vue'
 import StCheckbox from './src/components/StCheckbox.vue'
 import StClipboard from './src/components/StClipboard.vue'
 import StDropdown from './src/components/StDropdown.vue'
+import StFormItem from './src/components/StFormItem.vue'
 import StIcon from './src/components/StIcon.vue'
 import StInput from './src/components/StInput.vue'
 import StLink from './src/components/StLink.vue'
@@ -17,6 +18,7 @@ import StTag from './src/components/StTag.vue'
 import StTooltip from './src/components/StTooltip.vue'
 export {
     StAmount,
+    StFormItem,
     StButton,
     StLink,
     StCheckbox,
@@ -32,6 +34,6 @@ export {
     StSwitch,
     StTooltip,
     StTag,
-    StIcon
+    StIcon,
 }
 
